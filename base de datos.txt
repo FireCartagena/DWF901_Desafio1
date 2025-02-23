@@ -1,0 +1,30 @@
+-- Creación de la base de datos
+CREATE DATABASE IF NOT EXISTS gestion_rh;
+USE gestion_rh;
+
+-- Creación de la tabla 'departamentos'
+CREATE TABLE departamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+-- Creación de la tabla 'empleados'
+CREATE TABLE empleados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    departamento_id INT,
+    FOREIGN KEY (departamento_id) REFERENCES departamentos(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- Inserción de datos de ejemplo en la tabla 'departamentos'
+INSERT INTO departamentos (nombre) VALUES ('Recursos Humanos'), ('Tecnología'), ('Finanzas');
+
+-- Inserción de datos de ejemplo en la tabla 'empleados'
+INSERT INTO empleados (nombre, apellido, email, telefono, departamento_id) 
+VALUES 
+('Juan', 'Pérez', 'juan.perez@example.com', '1234567890', 1),
+('Ana', 'García', 'ana.garcia@example.com', '0987654321', 2),
+('Luis', 'Martínez', 'luis.martinez@example.com', '1112223333', 3);
